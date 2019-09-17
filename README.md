@@ -12,7 +12,7 @@
 
 #### Documentation
 * [api docs](http://xyz.com) (API servers)
-* [jsdoc](http://xyz.com) (Server assignments)
+* [jsdoc](http://127.0.0.1:3000/docs/) (Server assignments)
 * [styleguide](http://xyz.com) (React assignments)
 
 ### Setup
