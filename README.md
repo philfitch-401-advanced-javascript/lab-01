@@ -1,8 +1,8 @@
-# LAB - 
+# LAB - 01
 
-## Project Name
+## Validators
 
-### Author: Student/Group Name
+### Author: Phil Fitch
 
 ### Links and Resources
 * [submission PR](http://xyz.com)
