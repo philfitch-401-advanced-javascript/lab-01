@@ -5,31 +5,18 @@
 ### Author: Phil Fitch
 
 ### Links and Resources
-* [submission PR](http://xyz.com)
-* [travis](http://xyz.com)
-* [back-end](http://xyz.com) (when applicable)
-* [front-end](http://xyz.com) (when applicable)
+* [submission PR](https://github.com/philfitch-401-advanced-javascript/lab-01/pull/1)
+* [travis](https://travis-ci.com/philfitch-401-advanced-javascript/lab-01)
 
 #### Documentation
-* [api docs](http://xyz.com) (API servers)
 * [jsdoc](http://127.0.0.1:3000/docs/) (Server assignments)
-* [styleguide](http://xyz.com) (React assignments)
-
-### Setup
-#### `.env` requirements
-* `PORT` - Port Number
-* `MONGODB_URI` - URL to the running mongo instance/db
-
-**or, include an `.env.example`**
-
-#### Running the app
 
 **Describe what npm scripts do**
 (hint: `> npm run` from command line will give you list, paste here and change
 command to description)
-  
-#### Tests
-Any additional testing information
 
-#### UML
-Link to an image of the UML for your application and response to events
+`> npm test` runs all test suites
+`> npm run lint` runs linter
+`> npm run test-watch` monitors test conditions
+`> npm run jsdoc` populates jsdoc files
+  
