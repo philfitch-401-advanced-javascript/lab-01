@@ -80,16 +80,25 @@ describe('validator module', () => {
       expect(validator.isArrayOfStrings(arrayOfBooleans)).toBeFalsy();
     });
 
-    it.skip('numbers', () => {
-
+    it('numbers', () => {
+      expect(validator.isArrayOfNumbers(arrayOfStrings)).toBeFalsy();
+      expect(validator.isArrayOfNumbers(arrayOfNumbers)).toBeTruthy();
+      expect(validator.isArrayOfNumbers(arrayOfObjects)).toBeFalsy();
+      expect(validator.isArrayOfNumbers(arrayOfBooleans)).toBeFalsy();
     });
 
-    it.skip('objects', () => {
-    
+    it('objects', () => {
+      expect(validator.isArrayOfObjects(arrayOfStrings)).toBeFalsy();
+      expect(validator.isArrayOfObjects(arrayOfNumbers)).toBeFalsy();
+      expect(validator.isArrayOfObjects(arrayOfObjects)).toBeTruthy();
+      expect(validator.isArrayOfObjects(arrayOfBooleans)).toBeFalsy();
     });
 
-    it.skip('booleans', () => {
-    
+    it('booleans', () => {
+      expect(validator.isArrayOfBooleans(arrayOfStrings)).toBeFalsy();
+      expect(validator.isArrayOfBooleans(arrayOfNumbers)).toBeFalsy();
+      expect(validator.isArrayOfBooleans(arrayOfObjects)).toBeFalsy();
+      expect(validator.isArrayOfBooleans(arrayOfBooleans)).toBeTruthy();
     });
   });
 
