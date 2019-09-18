@@ -1,4 +1,11 @@
 const validator = require('../lib/validator.js');
+const {
+  makeString,
+  makeBoolean,
+  makeNum,
+  // makeDate,
+  getCaster
+} = require('../lib/validator.js');
 
 describe('validator module', () => {
   
@@ -8,6 +15,8 @@ describe('validator module', () => {
   const obj = { x: 'y' };
   const func = () => {};
   const bool = false;
+  const date = new Date();
+  const testDate = date;
 
   describe('performs basic validation of', () => {
 
@@ -105,7 +114,6 @@ describe('validator module', () => {
   describe('get validator for', () => {
 
     it('strings', () => {
-      // TODO: pass getValidator the rules
       expect(validator.getValidator(String)).toBe(validator.isString);
     });
     
@@ -144,6 +152,70 @@ describe('validator module', () => {
     it('array of booleans', () => {
       expect(validator.getValidator('Array of Booleans')).toBe(validator.isArrayOfBooleans);
     });
+  });
 
+  describe('coerces data type or throws error', () => {
+
+    it('coerces strings', () => {
+      expect(makeString(str)).toEqual('yes');
+      expect(makeString(num)).toEqual('1');
+      expect(makeString(bool)).toEqual('false');
+      // expect(makeString(date)).toEqual();
+      expect(() => {
+        makeString(obj);
+      }).toThrowError('invalid type');
+      expect(() => {
+        makeString(arr);
+      }).toThrowError('invalid type');
+    });
+    
+    it('coerces booleans', () => {
+      expect(makeBoolean(str)).toEqual(true);
+      expect(makeBoolean(num)).toEqual(true);
+      expect(makeBoolean(bool)).toEqual(false);
+      // expect(makeBoolean(date)).toEqual(true);
+      expect(() => {
+        makeBoolean(obj);
+      }).toThrowError('invalid type');
+      expect(() => {
+        makeBoolean(arr);
+      }).toThrowError('invalid type');
+    });
+    
+    it('coerces numbers', () => {
+      expect(makeNum(str)).toEqual(NaN);
+      expect(makeNum(num)).toEqual(1);
+      expect(makeNum(bool)).toEqual(0);
+      // expect(makeNum(date)).toEqual();
+      expect(() => {
+        makeBoolean(obj);
+      }).toThrowError('invalid type');
+      expect(() => {
+        makeBoolean(arr);
+      }).toThrowError('invalid type');
+    });
+    
+    // it.skip('coerces dates', () => {
+
+    // })
+  });
+
+  describe('get caster for', () => {
+
+    it('strings', () => {
+      expect(getCaster(String)).toBe(makeString);
+    });
+    
+    it('numbers', () => {
+      expect(getCaster(Number)).toBe(makeNum);
+    });
+    
+    it('booleans', () => {
+      expect(getCaster(Boolean)).toBe(makeBoolean);
+    });
+
+    // it('dates', () => {
+    //   expect(getCaster(Date)).toBe(makeDate);
+    // });
   });
 });
