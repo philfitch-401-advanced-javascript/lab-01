@@ -3,7 +3,7 @@ const {
   makeString,
   makeBoolean,
   makeNum,
-  // makeDate,
+  makeDate,
   getCaster
 } = require('../lib/validator.js');
 
@@ -15,8 +15,7 @@ describe('validator module', () => {
   const obj = { x: 'y' };
   const func = () => {};
   const bool = false;
-  const date = new Date();
-  const testDate = date;
+  const date = new Date('2019-09-18T16:26:05.265Z');
 
   describe('performs basic validation of', () => {
 
@@ -160,20 +159,20 @@ describe('validator module', () => {
       expect(makeString(str)).toEqual('yes');
       expect(makeString(num)).toEqual('1');
       expect(makeString(bool)).toEqual('false');
-      // expect(makeString(date)).toEqual();
+      // expect(makeString(date)).toEqual('2019-09-18T16:26:05.265Z');
       expect(() => {
         makeString(obj);
-      }).toThrowError('invalid type');
+      }).toThrowError(`Expected string. Object is invalid type.`);
       expect(() => {
         makeString(arr);
-      }).toThrowError('invalid type');
+      }).toThrowError(`Expected string. Array is invalid type.`);
     });
     
     it('coerces booleans', () => {
       expect(makeBoolean(str)).toEqual(true);
       expect(makeBoolean(num)).toEqual(true);
       expect(makeBoolean(bool)).toEqual(false);
-      // expect(makeBoolean(date)).toEqual(true);
+      // expect(makeBoolean(date)).toEqual(false);
       expect(() => {
         makeBoolean(obj);
       }).toThrowError('invalid type');
@@ -195,9 +194,24 @@ describe('validator module', () => {
       }).toThrowError('invalid type');
     });
     
-    // it.skip('coerces dates', () => {
-
-    // })
+    it.skip('coerces dates', () => {
+      expect(makeDate(date)).toEqual(new Date('2019-09-18T16:26:05.265Z'));
+      expect(() => {
+        makeDate(obj);
+      }).toThrowError('invalid type');
+      expect(() => {
+        makeDate(arr);
+      }).toThrowError('invalid type');
+      expect(() => {
+        makeDate(str);
+      }).toThrowError('invalid type');
+      expect(() => {
+        makeDate(num);
+      }).toThrowError('invalid type');
+      expect(() => {
+        makeDate(bool);
+      }).toThrowError('invalid type');
+    });
   });
 
   describe('get caster for', () => {
@@ -214,8 +228,8 @@ describe('validator module', () => {
       expect(getCaster(Boolean)).toBe(makeBoolean);
     });
 
-    // it('dates', () => {
-    //   expect(getCaster(Date)).toBe(makeDate);
-    // });
+    it('dates', () => {
+      expect(getCaster(Date)).toBe(makeDate);
+    });
   });
 });
