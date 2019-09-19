@@ -3,27 +3,19 @@ const { ModelError } = require('../lib/Errors.js');
 
 describe('Schema', () => {
   const personSchema = {
-    'firstName': {
+    firstName: {
       type: String,
       required: true
     },
-    'lastName': {
+    lastName: {
       type: String,
       required: true
     },
-    // 'hair': {
-    //   type: Object,
-    //   required: false
-    // },
-    // 'favoriteFoods': {
-    //   type: Array,
-    //   required: false
-    // },
-    'married': {
+    married: {
       type: Boolean,
       required: false
     },
-    'kids': {
+    kids: {
       type: Number,
       required: false
     }
@@ -31,58 +23,49 @@ describe('Schema', () => {
 
   const schema = new Schema(personSchema);
   const goodPerson = {
-    'firstName': 'Chris',
-    'lastName': 'Sample',
-    // 'hair': {
-    //   'type': 'wavy',
-    //   'color': 'brown'
-    // },
-    // 'favoriteFoods': [
-    //   'pizza',
-    //   'cupcakes',
-    //   'salmon'
-    // ],
-    'married': true,
-    'kids': 3
+    firstName: 'Chris',
+    lastName: 'Sample',
+    married: true,
+    kids: 3
   };
 
   const badPerson = {
-    'firstName': 'Chris',
-    'lastName': 'Sample',
-    'hair': {
+    firstName: 'Chris',
+    lastName: 'Sample',
+    hair: {
       'type': 'wavy',
       'color': 'brown'
     },
-    'favoriteFoods': [
+    favoriteFoods: [
       'pizza',
       'cupcakes',
       'salmon'
     ],
-    'married': 'true',
-    'kids': 3
+    married: 'true',
+    kids: 3
   };
 
   const badPerson2 = {
-    'firstName': 'Chris',
-    'lastName': 'Sample',
-    'hair': {
+    firstName: 'Chris',
+    lastName: 'Sample',
+    hair: {
       'type': 'wavy',
       'color': 'brown'
     },
-    'favoriteFoods': [
+    favoriteFoods: [
       'pizza',
       'cupcakes',
       'salmon'
     ],
-    'married': 7,
-    'kids': 3
+    married: 7,
+    kids: 3
   };
 
   it('validates a correct model', () => {
     expect(schema.validate(goodPerson)).toEqual(goodPerson);
   });
 
-  it('coerces string to boolean if possible', () => {
+  it('coerces string to boolean', () => {
     expect(schema.validate(badPerson)).toEqual(goodPerson);
   });
 
@@ -92,5 +75,4 @@ describe('Schema', () => {
     }).toThrow(ModelError);
   });
 
-  // more test cases...
 });
