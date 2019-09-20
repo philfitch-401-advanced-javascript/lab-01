@@ -170,9 +170,11 @@ describe('validator module', () => {
     
     it('coerces booleans', () => {
       expect(makeBoolean(str)).toEqual(true);
-      expect(makeBoolean(num)).toEqual(true);
       expect(makeBoolean(bool)).toEqual(false);
       // expect(makeBoolean(date)).toEqual(false);
+      expect(() => {
+        makeBoolean(num);
+      }).toThrowError('invalid type');
       expect(() => {
         makeBoolean(obj);
       }).toThrowError('invalid type');
@@ -194,7 +196,7 @@ describe('validator module', () => {
       }).toThrowError('invalid type');
     });
     
-    it.skip('coerces dates', () => {
+    it('coerces dates', () => {
       expect(makeDate(date)).toEqual(new Date('2019-09-18T16:26:05.265Z'));
       expect(() => {
         makeDate(obj);
